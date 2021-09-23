@@ -1,3 +1,4 @@
+import 'package:ecensus_nepal/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -131,6 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       print(_emailController.text);
       print(_passwordController.text);
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (BuildContext context) => DashboardScreen()));
     }
   }
 }
