@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const ganakModel = require("./ganakModel");
-const individualModel = require("./individualModel");
+const { ganakSchema } = require("./ganakModel");
+const { individualSchema } = require("./individualModel");
 
 const censusSchema = new mongoose.Schema(
   {
@@ -53,72 +53,72 @@ const censusSchema = new mongoose.Schema(
           "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
       },
     },
-  },
-  drinkingWaterSource : {
-    type: String,
-    enum: {
-      values: ["mud", "cement", "dhalanPillar", "wood", "other"],
-      message:
-        "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
+    drinkingWaterSource: {
+      type: String,
+      enum: {
+        values: ["mud", "cement", "dhalanPillar", "wood", "other"],
+        message:
+          "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
+      },
     },
-  },
-  foodHeatSource : {
-    type: String,
-    enum: {
-      values: ["mud", "cement", "dhalanPillar", "wood", "other"],
-      message:
-        "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
+    foodHeatSource: {
+      type: String,
+      enum: {
+        values: ["mud", "cement", "dhalanPillar", "wood", "other"],
+        message:
+          "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
+      },
     },
-  },
-  lightSource : {
-    type: String,
-    enum: {
-      values: ["mud", "cement", "dhalanPillar", "wood", "other"],
-      message:
-        "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
+    lightSource: {
+      type: String,
+      enum: {
+        values: ["mud", "cement", "dhalanPillar", "wood", "other"],
+        message:
+          "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
+      },
     },
-  },
-  householdFacilitiesEquipments : {
-    type: [String],
-  },
-
-  //Death Part
-  isDeathWithinPast12Months : {
-    type: Boolean,
-    required: [true, 'isDeath record is required'],
-  },
-  noOfDeaths : {
-      type: Number,
-  },
-  deathPersons : {
+    householdFacilitiesEquipments: {
       type: [String],
-  },
-  
-  // Absence Part
-  isPersonAbroad :{
+    },
+
+    //Death Part
+    isDeathWithinPast12Months: {
+      type: Boolean,
+      required: [true, "isDeath record is required"],
+    },
+    noOfDeaths: {
+      type: Number,
+    },
+    deathPersons: {
+      type: [String],
+    },
+
+    // Absence Part
+    isPersonAbroad: {
       type: String,
       enum: {
         values: ["yes", "no", "don't know"],
         message:
           "{VALUE} not supported. isAbroad should be either yes, no or dont know",
       },
-  },
-  abroadPersons: {
+    },
+    abroadPersons: {
       type: [String],
-  },
+    },
 
-  // Individual Part
-  individualDetail: {
-      type: [individualModel],
-  },
+    // Individual Part
+    individualDetail: {
+      type: [individualSchema],
+    },
 
-  collectedBy : {
-      type: ganakModel,
-      required: [true, 'Data collector detail is required'],
+    collectedBy: {
+      type: ganakSchema,
+      //   required: [true, "Data collector detail is required"],
+    },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const censusModel = mongoose.model("Census", censusSchema);

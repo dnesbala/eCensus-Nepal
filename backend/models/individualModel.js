@@ -38,4 +38,4 @@ individualSchema.pre("save", function (next) {
 
 const individualModel = mongoose.model("Individual", individualSchema);
 
-module.exports = individualModel;
+module.exports = { individualSchema, individualModel };

@@ -44,4 +44,4 @@ ganakSchema.methods.correctPassword = async (password, passwordHash) => {
 
 const ganakModel = mongoose.model("Ganak", ganakSchema);
 
-module.exports = ganakModel;
+module.exports = { ganakSchema, ganakModel };

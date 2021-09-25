@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 
 const errorController = require("../backend/controllers/errorController");
 
+const censusRoutes = require("../backend/routes/censusRoutes");
+
 const app = express();
 
 dotenv.config({});
@@ -16,6 +18,10 @@ mongoose
   })
   .then((conn) => console.log("Connected to DB successfully"))
   .catch((err) => console.log(err));
+
+app.use(express.json());
+
+app.use("/api/v1/census", censusRoutes);
 
 app.use(errorController);
 
