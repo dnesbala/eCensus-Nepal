@@ -1,7 +1,20 @@
 const express = require("express");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 
 const app = express();
 
-app.listen(3000, () => console.log("Listening to the server"));
+dotenv.config({});
 
-app.get("/", (req, res) => res.send("Welcome to homepage"));
+// DATABASE Connection
+mongoose
+  .connect(process.env.DATABASE_CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((conn) => console.log("Connected to DB successfully"))
+  .catch((err) => console.log(err));
+
+// Listening to SERVER
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
