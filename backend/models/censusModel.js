@@ -48,7 +48,7 @@ const censusSchema = new mongoose.Schema(
     baseHouseMade: {
       type: String,
       enum: {
-        values: ["mud", "cement", "dhalanPillar", "wood", "other"],
+        values: ["mud", "concrete", "metalframe", "wood", "other"],
         message:
           "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
       },
