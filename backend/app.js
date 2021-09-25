@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
+const errorController = require("../backend/controllers/errorController");
+
 const app = express();
 
 dotenv.config({});
@@ -14,6 +16,8 @@ mongoose
   })
   .then((conn) => console.log("Connected to DB successfully"))
   .catch((err) => console.log(err));
+
+app.use(errorController);
 
 // Listening to SERVER
 const PORT = process.env.PORT || 3000;

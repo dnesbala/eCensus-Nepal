@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const ganakModel = require("./ganakModel");
 const individualModel = require("./individualModel");
 
 const censusSchema = new mongoose.Schema(
@@ -109,6 +110,11 @@ const censusSchema = new mongoose.Schema(
   // Individual Part
   individualDetail: {
       type: [individualModel],
+  },
+
+  collectedBy : {
+      type: ganakModel,
+      required: [true, 'Data collector detail is required'],
   },
   {
     timestamps: true,
