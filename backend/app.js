@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const errorController = require("../backend/controllers/errorController");
 
 const censusRoutes = require("../backend/routes/censusRoutes");
+const ganakRoutes = require("./routes/ganakRoutes");
 
 const app = express();
 
@@ -22,6 +23,7 @@ mongoose
 app.use(express.json());
 
 app.use("/api/v1/census", censusRoutes);
+app.use("/api/v1/ganak", ganakRoutes);
 
 app.use(errorController);
 

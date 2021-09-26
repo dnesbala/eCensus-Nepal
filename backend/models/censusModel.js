@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const { ganakSchema } = require("./ganakModel");
-const { individualSchema } = require("./individualModel");
 
 const censusSchema = new mongoose.Schema(
   {
@@ -48,9 +46,9 @@ const censusSchema = new mongoose.Schema(
     baseHouseMade: {
       type: String,
       enum: {
-        values: ["mud", "concrete", "metalframe", "wood", "other"],
+        values: ["mud", "concretePillar", "metalframe", "wood", "other"],
         message:
-          "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
+          "{VALUE} not supported. OwnHouse should be either mud, concretePillar, metalframe, wood or other only",
       },
     },
     drinkingWaterSource: {
@@ -58,7 +56,7 @@ const censusSchema = new mongoose.Schema(
       enum: {
         values: ["tap", "well", "jar", "river", "other"],
         message:
-          "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
+          "{VALUE} not supported. OwnHouse should be either tap, well, jar, river or other only",
       },
     },
     foodHeatSource: {
@@ -66,7 +64,7 @@ const censusSchema = new mongoose.Schema(
       enum: {
         values: ["gas", "electric appliances", "wood"],
         message:
-          "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
+          "{VALUE} not supported. OwnHouse should be either gas, electric appliances or wood only",
       },
     },
     lightSource: {
@@ -74,7 +72,7 @@ const censusSchema = new mongoose.Schema(
       enum: {
         values: ["wax candle", "kerosene", "bulb", "solar", "other"],
         message:
-          "{VALUE} not supported. OwnHouse should be either mud, cement, dhalanPillar, wood or other only",
+          "{VALUE} not supported. OwnHouse should be either wax candle, kerosene, bulb, solar or other only",
       },
     },
     householdFacilitiesEquipments: {
@@ -107,19 +105,29 @@ const censusSchema = new mongoose.Schema(
     },
 
     // Individual Part
-    individualDetail: {
-      type: [individualSchema],
-    },
+    individualDetail: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Individual",
+      },
+    ],
 
     collectedBy: {
-      type: ganakSchema,
-      //   required: [true, "Data collector detail is required"],
+      type: mongoose.Schema.ObjectId,
+      ref: "Ganak",
     },
   },
   {
     timestamps: true,
   }
 );
+
+censusSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "collectedBy",
+  });
+  next();
+});
 
 const censusModel = mongoose.model("Census", censusSchema);
 
