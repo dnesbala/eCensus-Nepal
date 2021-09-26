@@ -1,39 +1,49 @@
+import 'package:ecensus_nepal/screens/add_new_data_screen.dart';
 import 'package:ecensus_nepal/widgets/dashboard_card.dart';
 import 'package:flutter/material.dart';
 
 List<DashboardCard> dashboardActions = [
   DashboardCard(
-      icon: Icons.add, text: 'Add New Data', onTap: () => print('tapped')),
+    icon: Icons.add,
+    text: 'Add New Data',
+    screenName: AddNewDataScreen(),
+  ),
   DashboardCard(
-      icon: Icons.folder_outlined,
-      iconColor: Colors.blue,
-      text: 'Collected Data',
-      onTap: () {}),
+    icon: Icons.folder_outlined,
+    iconColor: Colors.blue,
+    text: 'Collected Data',
+    screenName: AddNewDataScreen(),
+  ),
   DashboardCard(
-      icon: Icons.save_outlined,
-      iconColor: Colors.teal,
-      text: 'Drafts',
-      onTap: () {}),
+    icon: Icons.save_outlined,
+    iconColor: Colors.teal,
+    text: 'Drafts',
+    screenName: AddNewDataScreen(),
+  ),
   DashboardCard(
-      icon: Icons.amp_stories_sharp,
-      iconColor: Colors.orange,
-      text: 'About App',
-      onTap: () {}),
+    icon: Icons.amp_stories_sharp,
+    iconColor: Colors.orange,
+    text: 'About App',
+    screenName: AddNewDataScreen(),
+  ),
   DashboardCard(
-      icon: Icons.apps_outlined,
-      iconColor: Colors.purple.shade400,
-      text: 'App Guide',
-      onTap: () {}),
+    icon: Icons.apps_outlined,
+    iconColor: Colors.purple.shade400,
+    text: 'App Guide',
+    screenName: AddNewDataScreen(),
+  ),
   DashboardCard(
-      icon: Icons.exit_to_app_outlined,
-      iconColor: Colors.black87,
-      text: 'Exit App',
-      onTap: () {}),
+    icon: Icons.exit_to_app_outlined,
+    iconColor: Colors.black87,
+    text: 'Exit App',
+    screenName: AddNewDataScreen(),
+  ),
   DashboardCard(
-      icon: Icons.logout_outlined,
-      iconColor: Colors.red.shade400,
-      text: 'Log Out',
-      onTap: () {}),
+    icon: Icons.logout_outlined,
+    iconColor: Colors.red.shade400,
+    text: 'Log Out',
+    screenName: AddNewDataScreen(),
+  ),
 ];
 
 class DashboardScreen extends StatelessWidget {

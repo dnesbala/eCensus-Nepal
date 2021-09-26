@@ -4,14 +4,14 @@ class DashboardCard extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final String text;
-  final VoidCallback onTap;
+  final Widget screenName;
 
   const DashboardCard(
       {Key? key,
       required this.icon,
       this.iconColor = Colors.green,
       required this.text,
-      required this.onTap})
+      required this.screenName})
       : super(key: key);
 
   @override
@@ -23,7 +23,8 @@ class DashboardCard extends StatelessWidget {
         splashColor: Colors.grey.shade200,
         highlightColor: Colors.grey.shade300,
         borderRadius: BorderRadius.circular(10),
-        onTap: onTap,
+        onTap: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => screenName)),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
