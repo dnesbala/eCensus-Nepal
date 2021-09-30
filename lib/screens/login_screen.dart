@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:ecensus_nepal/models/ganak_model.dart';
 import 'package:ecensus_nepal/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +14,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  Dio dio = Dio();
+  var ganakInfo = Ganak();
 
   @override
   Widget build(BuildContext context) {
@@ -128,12 +132,25 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _login() {
+  void _login() async {
     if (_formKey.currentState!.validate()) {
-      print(_emailController.text);
-      print(_passwordController.text);
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (BuildContext context) => DashboardScreen()));
+      try {
+        var response = await dio
+            .post('https://ecensus.herokuapp.com/api/v1/ganak/login', data: {
+          "email": _emailController.text,
+          "password": _passwordController.text
+        });
+        if (response.statusCode == 200) {
+          ganakInfo = Ganak.fromJson(response.data);
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  DashboardScreen(ganak: ganakInfo)));
+        }
+      } on DioError catch (err) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(err.response?.data['message']),
+        ));
+      }
     }
   }
 }

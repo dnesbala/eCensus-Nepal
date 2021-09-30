@@ -48,7 +48,7 @@ const censusSchema = new mongoose.Schema(
       enum: {
         values: ["mud", "concretePillar", "metalframe", "wood", "other"],
         message:
-          "{VALUE} not supported. OwnHouse should be either mud, concretePillar, metalframe, wood or other only",
+          "{VALUE} not supported. baseHouseMade should be either mud, concretePillar, metalframe, wood or other only",
       },
     },
     drinkingWaterSource: {
@@ -56,23 +56,23 @@ const censusSchema = new mongoose.Schema(
       enum: {
         values: ["tap", "well", "jar", "river", "other"],
         message:
-          "{VALUE} not supported. OwnHouse should be either tap, well, jar, river or other only",
+          "{VALUE} not supported. drinkingWaterSource should be either tap, well, jar, river or other only",
       },
     },
     foodHeatSource: {
       type: String,
       enum: {
-        values: ["gas", "electric appliances", "wood"],
+        values: ["gas", "electricAppliances", "wood", "other"],
         message:
-          "{VALUE} not supported. OwnHouse should be either gas, electric appliances or wood only",
+          "{VALUE} not supported. foodHeatSource should be either gas, electric appliances, wood or other only",
       },
     },
     lightSource: {
       type: String,
       enum: {
-        values: ["wax candle", "kerosene", "bulb", "solar", "other"],
+        values: ["electricity", "kerosene", "biogas", "solar", "other"],
         message:
-          "{VALUE} not supported. OwnHouse should be either wax candle, kerosene, bulb, solar or other only",
+          "{VALUE} not supported. lightSource should be either electricity, kerosene, biogas, solar or other only",
       },
     },
     householdFacilitiesEquipments: {

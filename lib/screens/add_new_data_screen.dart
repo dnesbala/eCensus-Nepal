@@ -1,10 +1,13 @@
+import 'package:ecensus_nepal/models/ganak_model.dart';
 import 'package:ecensus_nepal/models/options_model.dart';
 import 'package:ecensus_nepal/widgets/custom_radio.dart';
 import 'package:ecensus_nepal/widgets/single_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AddNewDataScreen extends StatefulWidget {
-  const AddNewDataScreen({Key? key}) : super(key: key);
+  final Ganak? ganak;
+  const AddNewDataScreen({Key? key, this.ganak}) : super(key: key);
 
   @override
   _AddNewDataScreenState createState() => _AddNewDataScreenState();
@@ -183,50 +186,62 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
                       ),
                       Divider(),
                       CustomRadio(
-                        question: 'ghar ko jag k le baneko xa?',
+                        question:
+                            'तपाईंको परिवारले प्रयोग गरेको घरको जग कस्तो छ?',
                         options: [
-                          OptionsModel(name: 'mato ko jodai', value: 'own'),
-                          OptionsModel(name: 'cement ko jodai', value: 'rent'),
+                          OptionsModel(name: 'माटोको जोडाई भएको', value: 'mud'),
                           OptionsModel(
-                              name: 'dhalan pillar', value: 'organizational'),
-                          OptionsModel(name: 'kath/baas', value: 'othsdafer'),
-                          OptionsModel(name: 'others', value: 'other'),
+                              name: 'ईटा/ढुङ्गा, सिमेन्टको जोडाई भएको',
+                              value: 'concretePillar'),
+                          OptionsModel(
+                              name: 'जस्ता पाताको', value: 'metalFrame'),
+                          OptionsModel(
+                              name: 'काठको खम्बा गाडेको', value: 'wood'),
+                          OptionsModel(name: 'अन्य', value: 'other'),
                         ],
                         onSelectItem: (String val) => baseHouseMade = val,
                       ),
                       Divider(),
                       CustomRadio(
-                        question: 'drinkingWaterSource ?',
+                        question:
+                            'तपाईंको परिवारले खानेपानीको मुख्य स्रोत कुन हो?',
                         options: [
-                          OptionsModel(name: 'tap', value: 'own'),
-                          OptionsModel(name: 'well', value: 'rent'),
-                          OptionsModel(name: 'jar', value: 'organizational'),
-                          OptionsModel(name: 'river', value: 'sdfa'),
-                          OptionsModel(name: 'other', value: 'other'),
+                          OptionsModel(
+                              name: 'धारा/पाइप(घर परिसर भित्र)', value: 'tap'),
+                          OptionsModel(
+                              name: 'खुला इनार/कुवा, मुल धारा', value: 'well'),
+                          OptionsModel(name: 'नदी/खोला', value: 'river'),
+                          OptionsModel(name: ' जार/बोत्तल', value: 'jar'),
+                          OptionsModel(name: 'अन्य', value: 'other'),
                         ],
-                        onSelectItem: (String val) => drinkingWaterSource = val,
+                        onSelectItem: (String val) => ownHouse = val,
                       ),
                       Divider(),
                       CustomRadio(
-                        question: 'foodHeatSource ?',
+                        question:
+                            ' तपाईको परिवारमा खाना पकाउन अक्सर(मुख्यरुपमा) कुन इन्धन प्रयोग गर्नुहुन्छ?',
                         options: [
-                          OptionsModel(name: 'gas', value: 'own'),
-                          OptionsModel(name: 'ele', value: 'rent'),
-                          OptionsModel(name: 'app', value: 'organizational'),
-                          OptionsModel(name: 'wood', value: 'other'),
+                          OptionsModel(name: 'काठ/दाउरा', value: 'wood'),
+                          OptionsModel(name: 'एल.पी ग्याँस', value: 'gas'),
+                          OptionsModel(
+                              name: 'बिजुली', value: 'electricAppliances'),
+                          OptionsModel(name: 'अन्य', value: 'other'),
                         ],
-                        onSelectItem: (String val) => foodHeatSource = val,
+                        onSelectItem: (String val) => ownHouse = val,
                       ),
                       Divider(),
                       CustomRadio(
-                        question: 'lightSource ?',
+                        question:
+                            ' तपाईको परिवारमा बत्ती बाल्न अक्सर (मुख्य रुपमा) के प्रयोग गर्नुहुन्छ?',
                         options: [
-                          OptionsModel(name: 'gas', value: 'own'),
-                          OptionsModel(name: 'ele', value: 'rent'),
-                          OptionsModel(name: 'app', value: 'organizational'),
-                          OptionsModel(name: 'wood', value: 'other'),
+                          OptionsModel(name: 'बिजुली', value: 'electricity'),
+                          OptionsModel(
+                              name: 'सोलार/सौर्ययर्जा', value: 'solar'),
+                          OptionsModel(name: 'बायोग्याँस', value: 'biogas'),
+                          OptionsModel(name: 'मट्टीतेल', value: 'kerosene'),
+                          OptionsModel(name: 'अन्य', value: 'other'),
                         ],
-                        onSelectItem: (String val) => lightSource = val,
+                        onSelectItem: (String val) => ownHouse = val,
                       ),
                     ],
                   ),
@@ -236,11 +251,12 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
                   title: Text("मृत्यु विवरण", style: TextStyle(fontSize: 18)),
                   content: Column(
                     children: [
-                      Text('isDeathWithinPast12Months?',
+                      Text(
+                          'गत १२ महिनामा तपाईंको परिवारमा कसैको मृत्यु भएको थियो?',
                           style: TextStyle(fontSize: 20)),
                       RadioListTile<bool>(
                         groupValue: isDeathWithinPast12Months,
-                        title: Text('Yes'),
+                        title: Text('थियो'),
                         value: true,
                         onChanged: (bool? val) {
                           setState(() {
@@ -250,7 +266,7 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
                       ),
                       RadioListTile<bool>(
                         groupValue: isDeathWithinPast12Months,
-                        title: Text('No'),
+                        title: Text('थिएन'),
                         value: false,
                         onChanged: (bool? val) {
                           setState(() {
@@ -274,8 +290,9 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
                                 filled: true,
                                 fillColor: Colors.grey.shade100,
                                 contentPadding: EdgeInsets.all(10),
-                                hintText: 'No of Deaths',
+                                hintText: 'कति जनाको मृत्यु भएको थियो?',
                               ),
+                              keyboardType: TextInputType.number,
                               onChanged: (String val) {
                                 if (val != '') {
                                   int num = int.parse(val);
@@ -304,8 +321,12 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
                                         filled: true,
                                         fillColor: Colors.grey.shade100,
                                         contentPadding: EdgeInsets.all(10),
-                                        hintText: 'Death Person ${i + 1} Name',
+                                        hintText: 'मृतक नाम ${i + 1}',
                                       ),
+                                      onSubmitted: (String val) {
+                                        deathPersons.add(val);
+                                      },
+                                      textInputAction: TextInputAction.next,
                                     ),
                                   ),
                               ],
@@ -413,5 +434,6 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
     print(districtTextController.text);
     print(baseHouseMade);
     print(noOfDeaths);
+    print(deathPersons);
   }
 }

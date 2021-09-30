@@ -2,9 +2,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
-const errorController = require("../backend/controllers/errorController");
+const errorController = require("./controllers/errorController");
 
-const censusRoutes = require("../backend/routes/censusRoutes");
+const censusRoutes = require("./routes/censusRoutes");
 const ganakRoutes = require("./routes/ganakRoutes");
 
 const app = express();

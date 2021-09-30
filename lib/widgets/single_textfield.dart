@@ -1,7 +1,4 @@
-import 'package:ecensus_nepal/models/census_model.dart';
-import 'package:ecensus_nepal/providers/census_data_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SingleTextField extends StatelessWidget {
   final String title;
@@ -28,7 +25,7 @@ class SingleTextField extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 8),
             TextFormField(
@@ -47,29 +44,10 @@ class SingleTextField extends StatelessWidget {
                 if (val == '') return "Required";
                 return null;
               },
-              onChanged: (String val) {
-                if (fieldName == 'province')
-                  context.read(censusDataProvider).state =
-                      Census().copyWith(province: val);
-                if (fieldName == 'district')
-                  context.read(censusDataProvider).state =
-                      Census().copyWith(district: val);
-                if (fieldName == 'municipality')
-                  context.read(censusDataProvider).state =
-                      Census().copyWith(municipality: val);
-                if (fieldName == 'wardNo')
-                  context.read(censusDataProvider).state =
-                      Census().copyWith(wardNo: int.parse(val));
-                if (fieldName == 'tole')
-                  context.read(censusDataProvider).state =
-                      Census().copyWith(tole: val);
-                if (fieldName == 'familyHeadName')
-                  context.read(censusDataProvider).state =
-                      Census().copyWith(familyHeadName: val);
-                if (fieldName == 'familyHeadContact')
-                  context.read(censusDataProvider).state =
-                      Census().copyWith(familyHeadContact: int.parse(val));
-              },
+              keyboardType:
+                  fieldName == 'wardNo' || fieldName == 'familyHeadContact'
+                      ? TextInputType.number
+                      : TextInputType.text,
             ),
           ],
         ),

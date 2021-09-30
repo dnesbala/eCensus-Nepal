@@ -1,57 +1,59 @@
+import 'package:ecensus_nepal/models/ganak_model.dart';
 import 'package:ecensus_nepal/screens/add_new_data_screen.dart';
 import 'package:ecensus_nepal/screens/collected_data_screen.dart';
 import 'package:ecensus_nepal/widgets/dashboard_card.dart';
 import 'package:flutter/material.dart';
 
-List<DashboardCard> dashboardActions = [
-  DashboardCard(
-    icon: Icons.add,
-    text: 'Add New Data',
-    screenName: AddNewDataScreen(),
-  ),
-  DashboardCard(
-    icon: Icons.folder_outlined,
-    iconColor: Colors.blue,
-    text: 'Collected Data',
-    screenName: CollectedDataScreen(),
-  ),
-  DashboardCard(
-    icon: Icons.save_outlined,
-    iconColor: Colors.teal,
-    text: 'Drafts',
-    screenName: CollectedDataScreen(),
-  ),
-  DashboardCard(
-    icon: Icons.amp_stories_sharp,
-    iconColor: Colors.orange,
-    text: 'About App',
-    screenName: CollectedDataScreen(),
-  ),
-  DashboardCard(
-    icon: Icons.apps_outlined,
-    iconColor: Colors.purple.shade400,
-    text: 'App Guide',
-    screenName: CollectedDataScreen(),
-  ),
-  DashboardCard(
-    icon: Icons.exit_to_app_outlined,
-    iconColor: Colors.black87,
-    text: 'Exit App',
-    screenName: CollectedDataScreen(),
-  ),
-  DashboardCard(
-    icon: Icons.logout_outlined,
-    iconColor: Colors.red.shade400,
-    text: 'Log Out',
-    screenName: CollectedDataScreen(),
-  ),
-];
-
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  final Ganak? ganak;
+  const DashboardScreen({Key? key, this.ganak}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<DashboardCard> dashboardActions = [
+      DashboardCard(
+        icon: Icons.add,
+        text: 'Add New Data',
+        screenName: AddNewDataScreen(ganak: ganak),
+      ),
+      DashboardCard(
+        icon: Icons.folder_outlined,
+        iconColor: Colors.blue,
+        text: 'Collected Data',
+        screenName: CollectedDataScreen(),
+      ),
+      DashboardCard(
+        icon: Icons.save_outlined,
+        iconColor: Colors.teal,
+        text: 'Drafts',
+        screenName: CollectedDataScreen(),
+      ),
+      DashboardCard(
+        icon: Icons.amp_stories_sharp,
+        iconColor: Colors.orange,
+        text: 'About App',
+        screenName: CollectedDataScreen(),
+      ),
+      DashboardCard(
+        icon: Icons.apps_outlined,
+        iconColor: Colors.purple.shade400,
+        text: 'App Guide',
+        screenName: CollectedDataScreen(),
+      ),
+      DashboardCard(
+        icon: Icons.exit_to_app_outlined,
+        iconColor: Colors.black87,
+        text: 'Exit App',
+        screenName: CollectedDataScreen(),
+      ),
+      DashboardCard(
+        icon: Icons.logout_outlined,
+        iconColor: Colors.red.shade400,
+        text: 'Log Out',
+        screenName: CollectedDataScreen(),
+      ),
+    ];
+
     return Scaffold(
       backgroundColor: Color(0xFF373A5B),
       body: SafeArea(
@@ -61,7 +63,7 @@ class DashboardScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 10, top: 20),
               child: Text(
-                'Welcome, Mr Dinesh',
+                'Welcome, Mr ${ganak?.data?.name ?? 'Ganak'}',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
