@@ -20,7 +20,7 @@ const individualSchema = new mongoose.Schema(
     },
     dob: {
       type: Date,
-      required: [true, "DOB is required"],
+      // required: [true, "DOB is required"],
     },
     age: {
       type: Number,

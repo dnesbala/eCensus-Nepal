@@ -1,4 +1,5 @@
 import 'package:ecensus_nepal/screens/add_new_data_screen.dart';
+import 'package:ecensus_nepal/screens/collected_data_screen.dart';
 import 'package:ecensus_nepal/widgets/dashboard_card.dart';
 import 'package:flutter/material.dart';
 
@@ -12,37 +13,37 @@ List<DashboardCard> dashboardActions = [
     icon: Icons.folder_outlined,
     iconColor: Colors.blue,
     text: 'Collected Data',
-    screenName: AddNewDataScreen(),
+    screenName: CollectedDataScreen(),
   ),
   DashboardCard(
     icon: Icons.save_outlined,
     iconColor: Colors.teal,
     text: 'Drafts',
-    screenName: AddNewDataScreen(),
+    screenName: CollectedDataScreen(),
   ),
   DashboardCard(
     icon: Icons.amp_stories_sharp,
     iconColor: Colors.orange,
     text: 'About App',
-    screenName: AddNewDataScreen(),
+    screenName: CollectedDataScreen(),
   ),
   DashboardCard(
     icon: Icons.apps_outlined,
     iconColor: Colors.purple.shade400,
     text: 'App Guide',
-    screenName: AddNewDataScreen(),
+    screenName: CollectedDataScreen(),
   ),
   DashboardCard(
     icon: Icons.exit_to_app_outlined,
     iconColor: Colors.black87,
     text: 'Exit App',
-    screenName: AddNewDataScreen(),
+    screenName: CollectedDataScreen(),
   ),
   DashboardCard(
     icon: Icons.logout_outlined,
     iconColor: Colors.red.shade400,
     text: 'Log Out',
-    screenName: AddNewDataScreen(),
+    screenName: CollectedDataScreen(),
   ),
 ];
 
