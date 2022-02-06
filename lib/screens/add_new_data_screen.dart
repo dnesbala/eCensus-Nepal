@@ -1,5 +1,8 @@
+import 'package:ecensus_nepal/models/census_data_model.dart';
 import 'package:ecensus_nepal/models/ganak_model.dart';
 import 'package:ecensus_nepal/models/options_model.dart';
+import 'package:ecensus_nepal/screens/dashboard_screen.dart';
+import 'package:ecensus_nepal/widgets/boxes.dart';
 import 'package:ecensus_nepal/widgets/custom_radio.dart';
 import 'package:ecensus_nepal/widgets/single_textfield.dart';
 import 'package:flutter/material.dart';
@@ -36,11 +39,11 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
   final familyHeadContactTextController = TextEditingController();
   final noOfDeathsTextController = TextEditingController();
 
-  var ownHouse = "other";
-  var baseHouseMade = "";
-  var drinkingWaterSource = "";
-  var foodHeatSource = "";
-  var lightSource = "";
+  var ownHouse = "own";
+  var baseHouseMade = "mud";
+  var drinkingWaterSource = "tap";
+  var foodHeatSource = "wood";
+  var lightSource = "electricity";
 
   List<String> deathPersons = [];
   List individualDetails = [];
@@ -214,7 +217,7 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
                           OptionsModel(name: ' जार/बोत्तल', value: 'jar'),
                           OptionsModel(name: 'अन्य', value: 'other'),
                         ],
-                        onSelectItem: (String val) => ownHouse = val,
+                        onSelectItem: (String val) => drinkingWaterSource = val,
                       ),
                       Divider(),
                       CustomRadio(
@@ -227,7 +230,7 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
                               name: 'बिजुली', value: 'electricAppliances'),
                           OptionsModel(name: 'अन्य', value: 'other'),
                         ],
-                        onSelectItem: (String val) => ownHouse = val,
+                        onSelectItem: (String val) => foodHeatSource = val,
                       ),
                       Divider(),
                       CustomRadio(
@@ -241,7 +244,7 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
                           OptionsModel(name: 'मट्टीतेल', value: 'kerosene'),
                           OptionsModel(name: 'अन्य', value: 'other'),
                         ],
-                        onSelectItem: (String val) => ownHouse = val,
+                        onSelectItem: (String val) => lightSource = val,
                       ),
                     ],
                   ),
@@ -430,10 +433,36 @@ class _AddNewDataScreenState extends State<AddNewDataScreen> {
   }
 
   _saveData() {
-    print(provinceTextController.text);
-    print(districtTextController.text);
-    print(baseHouseMade);
-    print(noOfDeaths);
-    print(deathPersons);
+    final censusData = CensusData()
+      ..province = provinceTextController.text
+      ..district = districtTextController.text
+      ..municipality = municipalityTextController.text
+      ..wardNo = int.parse(wardNoTextController.text)
+      ..tole = toleTextController.text
+      ..familyHeadName = familyHeadNameTextController.text
+      ..familyHeadContact = int.parse(familyHeadContactTextController.text)
+      ..ownHouse = ownHouse
+      ..baseHouseMade = baseHouseMade
+      ..drinkingWaterSource = drinkingWaterSource
+      ..foodHeatSource = foodHeatSource
+      ..lightSource = lightSource
+      ..isDeathWithinPast12Months = isDeathWithinPast12Months
+      ..noOfDeaths = noOfDeaths
+      ..deathPersons = deathPersons
+      ..individualDetail = [];
+
+    final box = Boxes.getCensusData();
+    box.add(censusData);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text('Data Added.'),
+      duration: Duration(seconds: 2),
+    ));
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => DashboardScreen(
+          ganak: widget.ganak,
+        ),
+      ),
+    );
   }
 }

@@ -1,6 +1,16 @@
-# ecensus_nepal
+# Ecensus Nepal
 
-A new Flutter project.
+eCensus Nepal is a digital way to collect and upload census data. No paperworks needed. Also, Data analysis and insights is made simplified.
+
+## Project Screenshots
+
+![Login page](./screenshots/login_page.jpg "Login Page")
+![Dashboard page](./screenshots/dashboard_page.jpg "Dashboard Page")
+![Add Census Data page](./screenshots/add_data_1.jpg "Add Data Page")
+![Add Census Data page](./screenshots/add_data_2.jpg "Add Data Page")
+![Add Census Data page](./screenshots/add_data_3.jpg "Add Data Page")
+![Saved Data page](./screenshots/saved_data.jpg "Saved Data Page")
+![Saved Data Detail page](./screenshots/saved_data_detail.jpg "Saved Data Detail Page")
 
 ## Getting Started
 

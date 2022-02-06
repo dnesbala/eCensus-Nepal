@@ -112,10 +112,10 @@ const censusSchema = new mongoose.Schema(
       },
     ],
 
-    collectedBy: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Ganak",
-    },
+    // collectedBy: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: "Ganak",
+    // },
   },
   {
     timestamps: true,

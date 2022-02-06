@@ -1,6 +1,7 @@
 import 'package:ecensus_nepal/models/ganak_model.dart';
 import 'package:ecensus_nepal/screens/add_new_data_screen.dart';
 import 'package:ecensus_nepal/screens/collected_data_screen.dart';
+import 'package:ecensus_nepal/screens/login_screen.dart';
 import 'package:ecensus_nepal/widgets/dashboard_card.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class DashboardScreen extends StatelessWidget {
         icon: Icons.folder_outlined,
         iconColor: Colors.blue,
         text: 'Collected Data',
-        screenName: CollectedDataScreen(),
+        screenName: CollectedDataScreen(ganak: ganak),
       ),
       DashboardCard(
         icon: Icons.save_outlined,
@@ -50,7 +51,7 @@ class DashboardScreen extends StatelessWidget {
         icon: Icons.logout_outlined,
         iconColor: Colors.red.shade400,
         text: 'Log Out',
-        screenName: CollectedDataScreen(),
+        screenName: LoginScreen(),
       ),
     ];
 
